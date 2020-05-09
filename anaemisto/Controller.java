@@ -17,23 +17,15 @@ public class Controller {
     public Controller() {
     }
 
-    @GetMapping
-    public List<Player> getPlayers() {
-        return playerSett.getAllPlayers();
-    }
-
     @GetMapping("/{id}")
     public Player getProduct(@PathVariable("id") long id) {
         return playerSett.findPlayerById(id);
     }
-
-    @PostMapping
-    public ResponseEntity<String> createPlayer(@RequestBody Player player) {
-        playerSett.createPlayer(player);
-        return new ResponseEntity<>(
-                "Player created successfully", HttpStatus.CREATED);
+    
+    @GetMapping
+    public List<Player> getPlayers() {
+        return playerSett.getAllPlayers();
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<String> updatePlayer(@PathVariable int id, @RequestParam String name) {
 
@@ -62,7 +54,12 @@ public class Controller {
 
         return new ResponseEntity<>("Player removed", HttpStatus.OK);
     }
-
+    @PostMapping
+    public ResponseEntity<String> createPlayer(@RequestBody Player player) {
+        playerSett.createPlayer(player);
+        return new ResponseEntity<>(
+                "Player created successfully", HttpStatus.CREATED);
+    }
 
 
 }
